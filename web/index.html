@@ -3,62 +3,129 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LegalEase - AI Legal Document Generator</title>
+<title>LegalEase — AI Legal Document Generator</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="layout">
     <aside class="sidebar">
-      <h2>Saved Documents</h2>
+      <div class="brand">
+        <span class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6l-9-4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">LegalEase</span>
+      </div>
+
+      <h2>Document Library</h2>
       <div id="doc-list" class="doc-list">
         <p class="muted">Loading...</p>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="dot dot-online"></span> API connected
       </div>
     </aside>
 
     <main class="content">
-      <header class="header">
-        <div class="logo">⚖️ LegalEase</div>
-        <h1>AI Legal Document Generator</h1>
-        <p class="subtitle">Not legal advice — have a professional review any generated document.</p>
-      </header>
+      <section class="hero">
+        <span class="eyebrow">AI-POWERED &middot; LEGAL DRAFTING</span>
+        <h1>Draft precise legal documents<br/>in seconds, not hours.</h1>
+        <p class="hero-sub">
+          Enter the parties, terms and date — LegalEase structures a complete,
+          formally worded document you can edit and export instantly.
+        </p>
+        <div class="hero-tags">
+          <span class="tag">Contracts</span>
+          <span class="tag">NDAs</span>
+          <span class="tag">Lease Agreements</span>
+          <span class="tag">Offer Letters</span>
+        </div>
+      </section>
 
       <section class="card form-card">
+        <div class="card-heading">
+          <h3>1. Describe your document</h3>
+          <p>Fill in the essentials — the AI handles the legal structure.</p>
+        </div>
+
         <div class="field">
-          <label for="documentType">Document Type <span class="hint">(e.g. Agreement, Contract, NDA)</span></label>
+          <label for="documentType">Document Type <span class="hint">e.g. Agreement, Contract, NDA</span></label>
           <input type="text" id="documentType" placeholder="Freelance Work Contract" />
         </div>
-        <div class="field">
-          <label for="parties">Parties Involved</label>
-          <textarea id="parties" rows="3" placeholder="Jane Doe (Service Provider), TechNova Inc. (Client)"></textarea>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="parties">Parties Involved</label>
+            <textarea id="parties" rows="3" placeholder="Jane Doe (Service Provider), TechNova Inc. (Client)"></textarea>
+          </div>
+          <div class="field">
+            <label for="effectiveDate">Effective Date</label>
+            <input type="text" id="effectiveDate" placeholder="April 15, 2025" />
+          </div>
         </div>
+
         <div class="field">
-          <label for="terms">Terms &amp; Conditions <span class="hint">(use semicolons for bullet points)</span></label>
-          <textarea id="terms" rows="4" placeholder="Payment within 7 days of invoice; Confidentiality must be maintained"></textarea>
+          <label for="terms">Terms &amp; Conditions <span class="hint">use semicolons to separate clauses</span></label>
+          <textarea id="terms" rows="4" placeholder="Payment within 7 days of invoice; Confidentiality must be maintained; Either party may terminate with 15 days notice"></textarea>
         </div>
-        <div class="field">
-          <label for="effectiveDate">Effective Date</label>
-          <input type="text" id="effectiveDate" placeholder="April 15, 2025" />
-        </div>
-        <button id="generateBtn" class="btn primary">Generate Document</button>
+
+        <button id="generateBtn" class="btn primary btn-lg">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9L12 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          Generate Document
+        </button>
         <p id="formError" class="error hidden"></p>
       </section>
 
       <section id="resultSection" class="card result-card hidden">
-        <div class="result-toolbar">
-          <span id="statusBadge" class="badge success hidden">✅ Document Generated Successfully!</span>
-          <button id="editToggleBtn" class="btn subtle">✏️ Click to Edit Document</button>
-          <button id="saveBtn" class="btn subtle hidden">💾 Save changes</button>
+        <div class="card-heading">
+          <h3>2. Review &amp; export</h3>
+          <span id="statusBadge" class="badge success hidden">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Generated successfully
+          </span>
         </div>
+
+        <div class="result-toolbar">
+          <button id="editToggleBtn" class="btn subtle">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 20h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Edit document
+          </button>
+          <button id="saveBtn" class="btn subtle hidden">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M17 21v-8H7v8M7 3v5h8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Save changes
+          </button>
+        </div>
+
         <div id="editorWrap" class="hidden">
           <textarea id="editor" rows="14"></textarea>
         </div>
+
         <div id="preview" class="preview"></div>
+
         <div class="downloads">
-          <button id="downloadTxt" class="btn">📄 Download as .TXT</button>
-          <button id="downloadDocx" class="btn">📝 Download as .DOCX</button>
-          <button id="downloadPdf" class="btn">📕 Download as .PDF</button>
+          <span class="downloads-label">Export as</span>
+          <button id="downloadTxt" class="btn download-btn">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            TXT
+          </button>
+          <button id="downloadDocx" class="btn download-btn accent-blue">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            DOCX
+          </button>
+          <button id="downloadPdf" class="btn download-btn accent-red">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            PDF
+          </button>
         </div>
       </section>
+
+      <p class="disclaimer">
+        LegalEase is an AI drafting aid, not legal advice. Have a qualified professional
+        review any document before use.
+      </p>
     </main>
   </div>
 
