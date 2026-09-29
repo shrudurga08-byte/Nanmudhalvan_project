@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LegalEase - AI Legal Document Generator</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Saved Documents</h2>
+      <div id="doc-list" class="doc-list">
+        <p class="muted">Loading...</p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="header">
+        <div class="logo">⚖️ LegalEase</div>
+        <h1>AI Legal Document Generator</h1>
+        <p class="subtitle">Not legal advice — have a professional review any generated document.</p>
+      </header>
+
+      <section class="card form-card">
+        <div class="field">
+          <label for="documentType">Document Type <span class="hint">(e.g. Agreement, Contract, NDA)</span></label>
+          <input type="text" id="documentType" placeholder="Freelance Work Contract" />
+        </div>
+        <div class="field">
+          <label for="parties">Parties Involved</label>
+          <textarea id="parties" rows="3" placeholder="Jane Doe (Service Provider), TechNova Inc. (Client)"></textarea>
+        </div>
+        <div class="field">
+          <label for="terms">Terms &amp; Conditions <span class="hint">(use semicolons for bullet points)</span></label>
+          <textarea id="terms" rows="4" placeholder="Payment within 7 days of invoice; Confidentiality must be maintained"></textarea>
+        </div>
+        <div class="field">
+          <label for="effectiveDate">Effective Date</label>
+          <input type="text" id="effectiveDate" placeholder="April 15, 2025" />
+        </div>
+        <button id="generateBtn" class="btn primary">Generate Document</button>
+        <p id="formError" class="error hidden"></p>
+      </section>
+
+      <section id="resultSection" class="card result-card hidden">
+        <div class="result-toolbar">
+          <span id="statusBadge" class="badge success hidden">✅ Document Generated Successfully!</span>
+          <button id="editToggleBtn" class="btn subtle">✏️ Click to Edit Document</button>
+          <button id="saveBtn" class="btn subtle hidden">💾 Save changes</button>
+        </div>
+        <div id="editorWrap" class="hidden">
+          <textarea id="editor" rows="14"></textarea>
+        </div>
+        <div id="preview" class="preview"></div>
+        <div class="downloads">
+          <button id="downloadTxt" class="btn">📄 Download as .TXT</button>
+          <button id="downloadDocx" class="btn">📝 Download as .DOCX</button>
+          <button id="downloadPdf" class="btn">📕 Download as .PDF</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="script.js"></script>
+</body>
+</html>
