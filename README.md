@@ -108,14 +108,6 @@ Or simply run `run.bat` (Windows) / `./run.sh` (macOS / Linux).
 
 ---
 
-### 6. Open in Browser
-
-- App: http://localhost:8501
-- API Docs: http://localhost:8000/docs
-
-The SQLite file `legalease.db` is created automatically on first start.
-
----
 
 ## Tech Stack
 
